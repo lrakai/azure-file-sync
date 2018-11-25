@@ -93,7 +93,7 @@
           },
           "allowedVmSkus": {
               "value": [
-                  "Basic_A1"
+                  "Standard_B1ms"
               ]
           }
       }
