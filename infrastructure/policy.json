@@ -33,10 +33,17 @@
                   "description": "The list of allowed VM SKUs",
                   "displayName": "Allowed VM SKUs"
               }
+          },
+          "allowedStorageSkus": {
+              "type": "array",
+              "metadata": {
+                  "description": "The list of allowed Storage SKUs",
+                  "displayName": "Allowed Storage SKUs"
+              }
           }
       },
-      "displayName": "Allowed locations, services, and VM SKUs",
-      "description": "This policy restrict the allowed locations, services, and VM SKUs.",
+      "displayName": "Allowed locations, services, and VM/Storage SKUs",
+      "description": "This policy restrict the allowed locations, services, and VM/Storage SKUs.",
       "policyRule": {
           "if": {
               "anyOf": [
@@ -62,6 +69,20 @@
                               "not": {
                                   "field": "Microsoft.Compute/virtualMachines/sku.name",
                                   "in": "[parameters('allowedVmSkus')]"
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "allOf": [
+                          {
+                              "field": "type",
+                              "equals": "Microsoft.Storage/storageAccounts/sku.name"
+                          },
+                          {
+                              "not": {
+                                  "field": "Microsoft.Compute/virtualMachines/sku.name",
+                                  "in": "[parameters('allowedStorageSkus')]"
                               }
                           }
                       ]
@@ -95,6 +116,11 @@
           "allowedVmSkus": {
               "value": [
                   "Standard_B1ms"
+              ]
+          },
+          "allowedStorageSkus": {
+              "value": [
+                  "Standard_LRS"
               ]
           }
       }
