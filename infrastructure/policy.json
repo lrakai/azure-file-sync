@@ -88,7 +88,8 @@
                   "Microsoft.Network/networkSecurityGroups",
                   "Microsoft.Network/publicIPAddresses",
                   "Microsoft.Network/virtualNetworks", 
-                  "Microsoft.Storage/storageAccounts"
+                  "Microsoft.Storage/storageAccounts",
+                  "Microsoft.StorageSync/storageSyncServices"
               ]
           },
           "allowedVmSkus": {
