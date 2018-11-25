@@ -8,7 +8,7 @@
         },
         "storageAccountName": {
             "type": "string",
-            "defaultValue": "calabdisks"
+            "defaultValue": "calabsync"
         },
         "networkInterfaceName": {
             "type": "string",
