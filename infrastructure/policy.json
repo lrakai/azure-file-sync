@@ -7,7 +7,8 @@
         "Microsoft.Authorization/*/Delete",
         "Microsoft.Authorization/*/Write",
         "Microsoft.Authorization/elevateAccess/Action",
-        "Microsoft.MarketplaceOrdering/*"
+        "Microsoft.MarketplaceOrdering/*",
+        "Microsoft.Web/*"
       ]
     }],
       "parameters": {
@@ -131,7 +132,12 @@
                   "Microsoft.Network/publicIPAddresses",
                   "Microsoft.Network/virtualNetworks", 
                   "Microsoft.Storage/storageAccounts",
-                  "Microsoft.StorageSync/storageSyncServices"
+                  "Microsoft.StorageSync/storageSyncServices",
+                  "Microsoft.KeyVault/vaults",
+                  "Microsoft.KeyVault/vaults/secrets",
+                  "Microsoft.Web/serverfarms",
+                  "Microsoft.Web/sites",
+                  "Microsoft.Web/sites/sourcecontrols"
               ]
           },
           "allowedVmSkus": {
