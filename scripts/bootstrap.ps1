@@ -9,15 +9,14 @@ function Install-AzurePowerShell {
 function Set-LabArtifacts {
     $ProgressPreference = 'SilentlyContinue' # Ignore progress updates (100X speedup)
     [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls" # GitHub only supports tls 1.2 now (PS use 1.0 by default)
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cloudacademy/azure-lab-provisioners/master/custom-rbac/New-CustomRole.ps1" -OutFile C:\Users\student\Desktop\New-CustomRole.ps1
+    Invoke-WebRequest -Uri "https://s3-us-west-2.amazonaws.com/clouda-labs-assets/azure-file-sync/StorageSyncAgent_V4_WS2016.msi" -OutFile "C:\Users\student\Desktop\StorageSyncAgent_V4_WS2016.msi"
     # Create backup
-    $path = "C:\Scripts"
+    $path = "C:\Agents"
     if(!(Test-Path $path))
     {
-        New-Item -ItemType Directory -Force -Path C:\Scripts
+        New-Item -ItemType Directory -Force -Path C:\Agents
     }
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cloudacademy/azure-lab-provisioners/master/custom-rbac/New-CustomRole.ps1" -OutFile $($path + "\" + "New-CustomRole.ps1")
-
+    Invoke-WebRequest -Uri "https://s3-us-west-2.amazonaws.com/clouda-labs-assets/azure-file-sync/StorageSyncAgent_V4_WS2016.msi" -OutFile $($path + "\" + "StorageSyncAgent_V4_WS2016.msi")
 }
 
 function Disable-InternetExplorerESC {
