@@ -9,7 +9,8 @@
                 "Microsoft.Authorization/*/Write",
                 "Microsoft.Authorization/elevateAccess/Action",
                 "Microsoft.MarketplaceOrdering/*",
-                "Microsoft.Web/*"
+                "Microsoft.Web/*",
+                "Microsoft.KeyVault/*"
             ]
         }
     ],
