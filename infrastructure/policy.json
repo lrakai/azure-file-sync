@@ -1,159 +1,161 @@
 {
-    "permissions": [{
-      "actions": [
-        "*"
-      ],
-      "notActions": [
-        "Microsoft.Authorization/*/Delete",
-        "Microsoft.Authorization/*/Write",
-        "Microsoft.Authorization/elevateAccess/Action",
-        "Microsoft.MarketplaceOrdering/*",
-        "Microsoft.Web/*"
-      ]
-    }],
-      "parameters": {
-           "allowedLocations": {
-              "type": "array",
-              "metadata": {
-                  "description": "The list of locations that can be specified when deploying resources",
-                  "strongType": "location",
-                  "displayName": "Allowed locations"
-              }
-          },
-          "allowedServices": {
-              "type": "array",
-              "metadata": {
-                  "description": "The list of Resource Types that are allowed.",
-                  "strongType": "type",
-                  "displayName": "Allowed resources"
-              }
-          },
-          "allowedVmSkus": {
-              "type": "array",
-              "metadata": {
-                  "description": "The list of allowed VM SKUs",
-                  "displayName": "Allowed VM SKUs"
-              }
-          },
-          "allowedVmExtensionTypes": {
-              "type": "array",
-              "metadata": {
-                  "description": "The list of allowed VM Extension types",
-                  "displayName": "Allowed VM Extension types"
-              }
-          },
-          "allowedStorageSkus": {
-              "type": "array",
-              "metadata": {
-                  "description": "The list of allowed Storage SKUs",
-                  "displayName": "Allowed Storage SKUs"
-              }
-          }
-      },
-      "displayName": "Allowed locations, services, and VM/Storage SKUs",
-      "description": "This policy restrict the allowed locations, services, and VM/Storage SKUs.",
-      "policyRule": {
-          "if": {
-              "anyOf": [
-                  {
-                      "not": {
-                          "field": "type",
-                          "in": "[parameters('allowedServices')]"
-                      }
-                  },
-                  {
-                      "not": {
-                          "field": "location",
-                          "in": "[parameters('allowedLocations')]"
-                      }
-                  },
-                  {
-                      "allOf": [
-                          {
-                              "field": "type",
-                              "equals": "Microsoft.Compute/virtualMachines"
-                          },
-                          {
-                              "not": {
-                                  "field": "Microsoft.Compute/virtualMachines/sku.name",
-                                  "in": "[parameters('allowedVmSkus')]"
-                              }
-                          }
-                      ]
-                  },
-                  {
-                      "allOf": [
-                          {
-                              "field": "type",
-                              "equals": "Microsoft.Compute/virtualMachines/extensions"
-                          },
-                          {
-                              "not": {
-                                  "field": "Microsoft.Compute/virtualMachines/extensions/type",
-                                  "in": "[parameters('allowedVmExtensionTypes')]"
-                              }
-                          }
-                      ]
-                  },
-                  {
-                      "allOf": [
-                          {
-                              "field": "type",
-                              "equals": "Microsoft.Storage/storageAccounts/sku.name"
-                          },
-                          {
-                              "not": {
-                                  "field": "Microsoft.Storage/storageAccounts/sku.name",
-                                  "in": "[parameters('allowedStorageSkus')]"
-                              }
-                          }
-                      ]
-                  }
-              ]
-          },
-          "then": {
-              "effect": "deny"
-          }
-      },
-      "parameters_values": {
-          "allowedLocations": {
-              "value": [
-                  "{RGLocation}"
-              ]
-          },
-          "allowedServices": {
-              "value": [
-                  "Microsoft.Compute/disks",
-                  "Microsoft.Compute/virtualMachines",
-                  "Microsoft.Compute/virtualMachines/extensions",
-                  "Microsoft.Network/networkInterfaces",
-                  "Microsoft.Network/networkInterfaces/write",
-                  "Microsoft.Network/networkSecurityGroups",
-                  "Microsoft.Network/publicIPAddresses",
-                  "Microsoft.Network/virtualNetworks", 
-                  "Microsoft.Storage/storageAccounts",
-                  "Microsoft.StorageSync/storageSyncServices",
-                  "Microsoft.KeyVault/vaults",
-                  "Microsoft.KeyVault/vaults/secrets",
-                  "Microsoft.Web/serverfarms",
-                  "Microsoft.Web/sites",
-                  "Microsoft.Web/sites/sourcecontrols"
-              ]
-          },
-          "allowedVmSkus": {
-              "value": [
-                  "Standard_B1ms"
-              ]
-          },
-          "allowedVmExtensionTypes": {
-              "value": [
-                  "CustomScriptExtension"
-              ]
-          },
-          "allowedStorageSkus": {
-              "value": [
-                  "Standard_LRS"
-              ]
-          }
-      }
-  }
+    "permissions": [
+        {
+            "actions": [
+                "*"
+            ],
+            "notActions": [
+                "Microsoft.Authorization/*/Delete",
+                "Microsoft.Authorization/*/Write",
+                "Microsoft.Authorization/elevateAccess/Action",
+                "Microsoft.MarketplaceOrdering/*",
+                "Microsoft.Web/*"
+            ]
+        }
+    ],
+    "parameters": {
+        "allowedLocations": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of locations that can be specified when deploying resources",
+                "strongType": "location",
+                "displayName": "Allowed locations"
+            }
+        },
+        "allowedServices": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of Resource Types that are allowed.",
+                "strongType": "type",
+                "displayName": "Allowed resources"
+            }
+        },
+        "allowedVmSkus": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of allowed VM SKUs",
+                "displayName": "Allowed VM SKUs"
+            }
+        },
+        "allowedVmExtensionTypes": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of allowed VM Extension types",
+                "displayName": "Allowed VM Extension types"
+            }
+        },
+        "allowedStorageSkus": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of allowed Storage SKUs",
+                "displayName": "Allowed Storage SKUs"
+            }
+        }
+    },
+    "displayName": "Allowed locations, services, and VM/Storage SKUs",
+    "description": "This policy restrict the allowed locations, services, and VM/Storage SKUs.",
+    "policyRule": {
+        "if": {
+            "anyOf": [
+                {
+                    "not": {
+                        "field": "type",
+                        "in": "[parameters('allowedServices')]"
+                    }
+                },
+                {
+                    "not": {
+                        "field": "location",
+                        "in": "[parameters('allowedLocations')]"
+                    }
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Compute/virtualMachines"
+                        },
+                        {
+                            "not": {
+                                "field": "Microsoft.Compute/virtualMachines/sku.name",
+                                "in": "[parameters('allowedVmSkus')]"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Compute/virtualMachines/extensions"
+                        },
+                        {
+                            "not": {
+                                "field": "Microsoft.Compute/virtualMachines/extensions/type",
+                                "in": "[parameters('allowedVmExtensionTypes')]"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Storage/storageAccounts/sku.name"
+                        },
+                        {
+                            "not": {
+                                "field": "Microsoft.Storage/storageAccounts/sku.name",
+                                "in": "[parameters('allowedStorageSkus')]"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    },
+    "parameters_values": {
+        "allowedLocations": {
+            "value": [
+                "{RGLocation}"
+            ]
+        },
+        "allowedServices": {
+            "value": [
+                "Microsoft.Compute/disks",
+                "Microsoft.Compute/virtualMachines",
+                "Microsoft.Compute/virtualMachines/extensions",
+                "Microsoft.Network/networkInterfaces",
+                "Microsoft.Network/networkInterfaces/write",
+                "Microsoft.Network/networkSecurityGroups",
+                "Microsoft.Network/publicIPAddresses",
+                "Microsoft.Network/virtualNetworks",
+                "Microsoft.Storage/storageAccounts",
+                "Microsoft.StorageSync/storageSyncServices",
+                "Microsoft.KeyVault/vaults",
+                "Microsoft.KeyVault/vaults/secrets",
+                "Microsoft.Web/serverfarms",
+                "Microsoft.Web/sites",
+                "Microsoft.Web/sites/sourcecontrols"
+            ]
+        },
+        "allowedVmSkus": {
+            "value": [
+                "Standard_B1ms"
+            ]
+        },
+        "allowedVmExtensionTypes": {
+            "value": [
+                "CustomScriptExtension"
+            ]
+        },
+        "allowedStorageSkus": {
+            "value": [
+                "Standard_LRS"
+            ]
+        }
+    }
+}
