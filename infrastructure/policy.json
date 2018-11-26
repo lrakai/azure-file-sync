@@ -34,6 +34,13 @@
                   "displayName": "Allowed VM SKUs"
               }
           },
+          "allowedVmExtensionTypes": {
+              "type": "array",
+              "metadata": {
+                  "description": "The list of allowed VM Extension types",
+                  "displayName": "Allowed VM Extension types"
+              }
+          },
           "allowedStorageSkus": {
               "type": "array",
               "metadata": {
@@ -77,11 +84,25 @@
                       "allOf": [
                           {
                               "field": "type",
+                              "equals": "Microsoft.Compute/virtualMachines/extensions"
+                          },
+                          {
+                              "not": {
+                                  "field": "Microsoft.Compute/virtualMachines/extensions/type",
+                                  "in": "[parameters('allowedVmExtensionTypes')]"
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "allOf": [
+                          {
+                              "field": "type",
                               "equals": "Microsoft.Storage/storageAccounts/sku.name"
                           },
                           {
                               "not": {
-                                  "field": "Microsoft.Compute/virtualMachines/sku.name",
+                                  "field": "Microsoft.Storage/storageAccounts/sku.name",
                                   "in": "[parameters('allowedStorageSkus')]"
                               }
                           }
@@ -116,6 +137,11 @@
           "allowedVmSkus": {
               "value": [
                   "Standard_B1ms"
+              ]
+          },
+          "allowedVmExtensionTypes": {
+              "value": [
+                  "CustomScriptExtension"
               ]
           },
           "allowedStorageSkus": {
