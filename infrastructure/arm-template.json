@@ -327,7 +327,35 @@
             },
             "tags": {
                 "Environment": "Dev"
-            }
+            },
+            "resources": [
+                {
+                    "apiVersion": "2015-06-15",
+                    "type": "extensions",
+                    "name": "provision",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [
+                        "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineNames')[0])]"
+                    ],
+                    "tags": {
+                        "displayName": "provision-vm"
+                    },
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.4",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "https://raw.githubusercontent.com/lrakai/azure-file-sync/master/scripts/bootstrap.ps1"
+                            ]
+                        },
+                        "protectedSettings": {
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File bootstrap.ps1 -user ',parameters('adminUsername'),' -password ',parameters('adminPassword'))]"
+                        }
+                    }
+                }
+            ]
         },
         {
             "name": "[parameters('virtualMachineNames')[1]]",
@@ -391,7 +419,34 @@
             },
             "tags": {
                 "Environment": "Dev"
-            }
+            },
+            "resources": [
+                {
+                    "apiVersion": "2015-06-15",
+                    "type": "extensions",
+                    "name": "provision",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [
+                        "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineNames')[1])]"
+                    ],
+                    "tags": {
+                        "displayName": "provision-vm"
+                    },
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.4",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "https://raw.githubusercontent.com/lrakai/azure-file-sync/master/scripts/bootstrap.ps1"
+                            ]
+                        },
+                        "protectedSettings": {
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File bootstrap.ps1 -user ',parameters('adminUsername'),' -password ',parameters('adminPassword'))]"
+                        }
+                    }
+                }
         }
     ],
     "outputs": {
