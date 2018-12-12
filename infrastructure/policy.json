@@ -138,6 +138,8 @@
                 "Microsoft.StorageSync/storageSyncServices",
                 "Microsoft.StorageSync/storageSyncServices/registeredServers",
                 "Microsoft.StorageSync/storageSyncServices/syncGroups",
+                "Microsoft.StorageSync/storageSyncServices/syncGroups/cloudEndpoints",
+                "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints",
                 "Microsoft.Authorization/roleAssignments",
                 "Microsoft.KeyVault/vaults",
                 "Microsoft.KeyVault/vaults/secrets",
