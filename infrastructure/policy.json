@@ -136,6 +136,7 @@
                 "Microsoft.Network/virtualNetworks",
                 "Microsoft.Storage/storageAccounts",
                 "Microsoft.StorageSync/storageSyncServices",
+                "Microsoft.StorageSync/storageSyncServices/registeredServers",
                 "Microsoft.KeyVault/vaults",
                 "Microsoft.KeyVault/vaults/secrets",
                 "Microsoft.Web/serverfarms",
