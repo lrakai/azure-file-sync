@@ -150,7 +150,8 @@
         },
         "allowedVmSkus": {
             "value": [
-                "Standard_B1ms"
+                "Standard_B1ms",
+                "Standard_B2ms"
             ]
         },
         "allowedVmExtensionTypes": {
